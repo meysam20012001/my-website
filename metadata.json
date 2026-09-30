@@ -1,0 +1,7 @@
+{
+  "name": "حساب‌یار | دستیار هوشمند مالی، کسب‌وکار و تقویم",
+  "description": "سامانه یکپارچه مدیریت فاکتور و مشتریان کسب‌وکار، محاسبه سود بانکی و اقساط، ماشین‌حساب درصد و تخفیف، و تبدیل دقیق تاریخ شمسی به میلادی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

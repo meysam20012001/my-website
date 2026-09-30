@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "customer": {
+      "title": "Customer",
+      "description": "Represents a business client or buyer",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier" },
+        "name": { "type": "string", "description": "Full name or business name", "maxLength": 150 },
+        "phone": { "type": "string", "description": "Contact phone number", "maxLength": 30 },
+        "nationalCode": { "type": "string", "description": "National ID code or economic code", "maxLength": 30 },
+        "address": { "type": "string", "description": "Physical address", "maxLength": 500 },
+        "notes": { "type": "string", "description": "Additional notes", "maxLength": 1000 },
+        "createdAtJalali": { "type": "string", "description": "Jalali date string" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["id", "name"]
+    },
+    "invoice": {
+      "title": "Invoice",
+      "description": "Represents a commercial invoice with line items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier" },
+        "invoiceNumber": { "type": "string", "description": "Invoice sequential or formatted number", "maxLength": 50 },
+        "customerId": { "type": "string", "description": "Customer ID foreign reference" },
+        "customerName": { "type": "string", "description": "Customer name", "maxLength": 150 },
+        "customerPhone": { "type": "string", "description": "Customer phone", "maxLength": 30 },
+        "customerAddress": { "type": "string", "description": "Customer address", "maxLength": 500 },
+        "dateJalali": { "type": "string", "description": "Issue date in Jalali calendar", "maxLength": 20 },
+        "dueDateJalali": { "type": "string", "description": "Due date in Jalali calendar", "maxLength": 20 },
+        "items": { "type": "string", "description": "JSON stringified invoice items array" },
+        "subtotal": { "type": "number", "description": "Gross subtotal amount in Tomans" },
+        "discountTotal": { "type": "number", "description": "Discount total amount in Tomans" },
+        "vatPercent": { "type": "number", "description": "VAT tax percentage" },
+        "vatAmount": { "type": "number", "description": "VAT tax amount in Tomans" },
+        "grandTotal": { "type": "number", "description": "Net total payable in Tomans" },
+        "paidAmount": { "type": "number", "description": "Amount already paid" },
+        "status": { "type": "string", "enum": ["paid", "unpaid", "partial"] },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["id", "invoiceNumber", "customerName", "grandTotal", "status"]
+    },
+    "businessSettings": {
+      "title": "BusinessSettings",
+      "description": "Store business profile and banking details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier" },
+        "businessName": { "type": "string", "maxLength": 150 },
+        "ownerName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "nationalId": { "type": "string", "maxLength": 50 },
+        "address": { "type": "string", "maxLength": 500 },
+        "cardNumber": { "type": "string", "maxLength": 30 },
+        "shabaNumber": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "businessName"]
+    }
+  },
+  "firestore": {
+    "/customers/{customerId}": {
+      "schema": "customer",
+      "description": "Collection of customer records"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": "invoice",
+      "description": "Collection of invoices"
+    },
+    "/settings/{settingsId}": {
+      "schema": "businessSettings",
+      "description": "Application settings and business profile"
+    }
+  }
+}
